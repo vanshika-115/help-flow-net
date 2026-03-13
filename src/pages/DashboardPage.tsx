@@ -11,14 +11,12 @@ const urgencyColors: Record<string, string> = {
 export default function DashboardPage() {
   const { donors, requests } = useApp();
 
-  const activeDonors = donors.filter((d) => d.available).length;
   const activeRequests = requests.filter((r) => r.status === "active").length;
 
   const stats = [
     { label: "Total Donors", value: donors.length, icon: Users, color: "text-primary" },
-    { label: "Available Now", value: activeDonors, icon: Heart, color: "text-success" },
     { label: "Active Requests", value: activeRequests, icon: Send, color: "text-warning" },
-    { label: "Lives Saved", value: 142, icon: Heart, color: "text-primary" },
+    { label: "Recent Donations", value: donors.filter((d) => d.available).length, icon: Heart, color: "text-success" },
   ];
 
   return (
@@ -28,7 +26,7 @@ export default function DashboardPage() {
         <p className="text-muted-foreground text-sm">Overview of Blood Bridge network</p>
       </div>
 
-      <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
+      <div className="grid grid-cols-3 gap-4 mb-8">
         {stats.map((s) => (
           <div key={s.label} className="stat-card">
             <div className="flex items-center justify-between mb-3">

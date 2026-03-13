@@ -16,9 +16,8 @@ export default function DashboardPage() {
 
   const stats = [
     { label: "Total Donors", value: donors.length, icon: Users, color: "text-primary" },
-    { label: "Available Now", value: activeDonors, icon: Heart, color: "text-success" },
     { label: "Active Requests", value: activeRequests, icon: Send, color: "text-warning" },
-    { label: "Lives Saved", value: 142, icon: Heart, color: "text-primary" },
+    { label: "Recent Donations", value: donors.filter((d) => d.available).length, icon: Heart, color: "text-success" },
   ];
 
   return (

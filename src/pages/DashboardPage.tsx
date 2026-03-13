@@ -11,7 +11,6 @@ const urgencyColors: Record<string, string> = {
 export default function DashboardPage() {
   const { donors, requests } = useApp();
 
-  const activeDonors = donors.filter((d) => d.available).length;
   const activeRequests = requests.filter((r) => r.status === "active").length;
 
   const stats = [

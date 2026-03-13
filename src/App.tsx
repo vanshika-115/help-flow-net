@@ -5,7 +5,6 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { AppProvider, useApp } from "@/context/AppContext";
 import Navbar from "@/components/Navbar";
 import LoginPage from "@/pages/LoginPage";
-import DashboardPage from "@/pages/DashboardPage";
 import DonorRegistration from "@/pages/DonorRegistration";
 import BloodRequestPage from "@/pages/BloodRequestPage";
 import DonorListPage from "@/pages/DonorListPage";
@@ -29,11 +28,10 @@ function AppRoutes() {
     <>
       <Navbar />
       <Routes>
-        <Route path="/" element={<Navigate to="/dashboard" replace />} />
-        <Route path="/dashboard" element={<DashboardPage />} />
+        <Route path="/" element={<Navigate to="/donors" replace />} />
+        <Route path="/donors" element={<DonorListPage />} />
         <Route path="/register" element={<DonorRegistration />} />
         <Route path="/request" element={<BloodRequestPage />} />
-        <Route path="/donors" element={<DonorListPage />} />
         <Route path="/map" element={<MapViewPage />} />
         <Route path="*" element={<NotFound />} />
       </Routes>

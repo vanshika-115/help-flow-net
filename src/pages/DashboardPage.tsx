@@ -26,7 +26,7 @@ export default function DashboardPage() {
         <p className="text-muted-foreground text-sm">Overview of Blood Bridge network</p>
       </div>
 
-      <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
+      <div className="grid grid-cols-3 gap-4 mb-8">
         {stats.map((s) => (
           <div key={s.label} className="stat-card">
             <div className="flex items-center justify-between mb-3">

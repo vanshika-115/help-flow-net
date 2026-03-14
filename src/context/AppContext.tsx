@@ -9,6 +9,15 @@ export type Donor = {
   available: boolean;
 };
 
+export type BloodRequest = {
+  id: string;
+  recipientName: string;
+  bloodGroup: string;
+  location: string;
+  urgency: string;
+  date: string;
+};
+
 type User = { name: string } | null;
 
 type AppContextType = {
@@ -16,6 +25,8 @@ type AppContextType = {
   setUser: (u: User) => void;
   donors: Donor[];
   addDonor: (d: Donor) => void;
+  bloodRequests: BloodRequest[];
+  addBloodRequest: (r: BloodRequest) => void;
 };
 
 const AppContext = createContext<AppContextType | undefined>(undefined);
@@ -30,10 +41,12 @@ const sampleDonors: Donor[] = [
 export function AppProvider({ children }: { children: ReactNode }) {
   const [user, setUser] = useState<User>(null);
   const [donors, setDonors] = useState<Donor[]>(sampleDonors);
+  const [bloodRequests, setBloodRequests] = useState<BloodRequest[]>([]);
   const addDonor = (d: Donor) => setDonors((prev) => [d, ...prev]);
+  const addBloodRequest = (r: BloodRequest) => setBloodRequests((prev) => [r, ...prev]);
 
   return (
-    <AppContext.Provider value={{ user, setUser, donors, addDonor }}>
+    <AppContext.Provider value={{ user, setUser, donors, addDonor, bloodRequests, addBloodRequest }}>
       {children}
     </AppContext.Provider>
   );

@@ -125,8 +125,26 @@ export default function BloodRequestPage() {
               <CheckCircle className="h-5 w-5 text-primary" />
               <span className="font-medium">Donor Assigned: {currentRequest?.assignedDonor}</span>
             </div>
-          ) : matchedDonors.length === 0 ? (
+          ) : matchedDonors.length === 0 && allGroupDonors.length === 0 ? (
             <p className="text-sm text-muted-foreground mt-2">No available donors found for {lastSubmittedGroup}.</p>
+          ) : matchedDonors.length === 0 ? (
+            <div className="mt-2 space-y-3">
+              <p className="text-sm text-destructive font-medium">No nearby donors found. Try expanding search area.</p>
+              <p className="text-xs text-muted-foreground">Showing all available {lastSubmittedGroup} donors:</p>
+              <div className="space-y-2">
+                {allGroupDonors.map((donor) => (
+                  <div key={donor.id} className="flex items-center justify-between border border-border rounded-lg p-3">
+                    <div>
+                      <p className="font-medium">{donor.name}</p>
+                      <p className="text-sm text-muted-foreground">{donor.bloodGroup} · {donor.city}</p>
+                    </div>
+                    <Button size="sm" onClick={() => handleAcceptDonor(donor.id, donor.name)}>
+                      <UserCheck className="h-4 w-4 mr-1" /> Accept
+                    </Button>
+                  </div>
+                ))}
+              </div>
+            </div>
           ) : (
             <div className="space-y-2 mt-3">
               {matchedDonors.map((donor) => (

@@ -32,6 +32,7 @@ export default function DonorRegistration() {
       phone: phone.trim(),
       city: city.trim(),
       available,
+      totalDonations: 0,
     });
     toast.success("Donor registered successfully!");
     navigate("/donors");

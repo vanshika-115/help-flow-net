@@ -35,6 +35,7 @@ export default function BloodRequestPage() {
       date: new Date().toLocaleDateString(),
     });
     setLastSubmittedGroup(bloodGroup);
+    setLastSubmittedLocation(location.trim());
     setLastRequestId(id);
     toast.success("Blood request submitted! Matching donors shown below.");
     setBloodGroup("");
@@ -42,7 +43,21 @@ export default function BloodRequestPage() {
     setUrgency("");
   };
 
+  const [lastSubmittedLocation, setLastSubmittedLocation] = useState("");
+
+  const extractCity = (address: string) =>
+    address.split(",").map((s) => s.trim().toLowerCase()).filter(Boolean);
+
   const matchedDonors = lastSubmittedGroup
+    ? donors.filter((d) => {
+        if (d.bloodGroup !== lastSubmittedGroup || !d.available) return false;
+        if (!lastSubmittedLocation) return true;
+        const addressParts = extractCity(lastSubmittedLocation);
+        return addressParts.some((part) => d.city.toLowerCase().includes(part) || part.includes(d.city.toLowerCase()));
+      })
+    : [];
+
+  const allGroupDonors = lastSubmittedGroup
     ? donors.filter((d) => d.bloodGroup === lastSubmittedGroup && d.available)
     : [];
 
@@ -110,8 +125,26 @@ export default function BloodRequestPage() {
               <CheckCircle className="h-5 w-5 text-primary" />
               <span className="font-medium">Donor Assigned: {currentRequest?.assignedDonor}</span>
             </div>
-          ) : matchedDonors.length === 0 ? (
+          ) : matchedDonors.length === 0 && allGroupDonors.length === 0 ? (
             <p className="text-sm text-muted-foreground mt-2">No available donors found for {lastSubmittedGroup}.</p>
+          ) : matchedDonors.length === 0 ? (
+            <div className="mt-2 space-y-3">
+              <p className="text-sm text-destructive font-medium">No nearby donors found. Try expanding search area.</p>
+              <p className="text-xs text-muted-foreground">Showing all available {lastSubmittedGroup} donors:</p>
+              <div className="space-y-2">
+                {allGroupDonors.map((donor) => (
+                  <div key={donor.id} className="flex items-center justify-between border border-border rounded-lg p-3">
+                    <div>
+                      <p className="font-medium">{donor.name}</p>
+                      <p className="text-sm text-muted-foreground">{donor.bloodGroup} · {donor.city}</p>
+                    </div>
+                    <Button size="sm" onClick={() => handleAcceptDonor(donor.id, donor.name)}>
+                      <UserCheck className="h-4 w-4 mr-1" /> Accept
+                    </Button>
+                  </div>
+                ))}
+              </div>
+            </div>
           ) : (
             <div className="space-y-2 mt-3">
               {matchedDonors.map((donor) => (

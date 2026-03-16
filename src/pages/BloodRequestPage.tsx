@@ -42,7 +42,21 @@ export default function BloodRequestPage() {
     setUrgency("");
   };
 
+  const [lastSubmittedLocation, setLastSubmittedLocation] = useState("");
+
+  const extractCity = (address: string) =>
+    address.split(",").map((s) => s.trim().toLowerCase()).filter(Boolean);
+
   const matchedDonors = lastSubmittedGroup
+    ? donors.filter((d) => {
+        if (d.bloodGroup !== lastSubmittedGroup || !d.available) return false;
+        if (!lastSubmittedLocation) return true;
+        const addressParts = extractCity(lastSubmittedLocation);
+        return addressParts.some((part) => d.city.toLowerCase().includes(part) || part.includes(d.city.toLowerCase()));
+      })
+    : [];
+
+  const allGroupDonors = lastSubmittedGroup
     ? donors.filter((d) => d.bloodGroup === lastSubmittedGroup && d.available)
     : [];
 

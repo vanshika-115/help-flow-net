@@ -41,14 +41,14 @@ function AppRoutes() {
 
 const App = () => (
   <QueryClientProvider client={queryClient}>
-    <TooltipProvider>
-      <Sonner />
-      <AppProvider>
+    <AppProvider>
+      <TooltipProvider>
+        <Sonner />
         <BrowserRouter>
           <AppRoutes />
         </BrowserRouter>
-      </AppProvider>
-    </TooltipProvider>
+      </TooltipProvider>
+    </AppProvider>
   </QueryClientProvider>
 );
 

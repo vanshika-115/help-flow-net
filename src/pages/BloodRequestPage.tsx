@@ -35,6 +35,7 @@ export default function BloodRequestPage() {
       date: new Date().toLocaleDateString(),
     });
     setLastSubmittedGroup(bloodGroup);
+    setLastSubmittedLocation(location.trim());
     setLastRequestId(id);
     toast.success("Blood request submitted! Matching donors shown below.");
     setBloodGroup("");

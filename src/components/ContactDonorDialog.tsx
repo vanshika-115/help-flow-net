@@ -68,9 +68,6 @@ export default function ContactDonorDialog({ donor, open, onOpenChange }: Contac
             <MessageSquare className="h-4 w-4 mr-2" /> Message
           </Button>
         </div>
-        <Button variant="secondary" className="w-full" onClick={() => setShowMap(true)}>
-          <MapPin className="h-4 w-4 mr-2" /> View Live Location
-        </Button>
       </DialogContent>
     </Dialog>
   );

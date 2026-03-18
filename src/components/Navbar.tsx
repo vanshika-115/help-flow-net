@@ -7,7 +7,6 @@ const navItems = [
   { path: "/donors", label: "Donor List" },
   { path: "/register", label: "Register Donor" },
   { path: "/request", label: "Request Blood" },
-  { path: "/map", label: "Map View" },
 ];
 
 export default function Navbar() {

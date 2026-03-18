@@ -32,7 +32,7 @@ function AppRoutes() {
         <Route path="/donors" element={<DonorListPage />} />
         <Route path="/register" element={<DonorRegistration />} />
         <Route path="/request" element={<BloodRequestPage />} />
-        <Route path="/map" element={<MapViewPage />} />
+        
         <Route path="*" element={<NotFound />} />
       </Routes>
     </>

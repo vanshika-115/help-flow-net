@@ -8,7 +8,7 @@ import LoginPage from "@/pages/LoginPage";
 import DonorRegistration from "@/pages/DonorRegistration";
 import BloodRequestPage from "@/pages/BloodRequestPage";
 import DonorListPage from "@/pages/DonorListPage";
-import MapViewPage from "@/pages/MapViewPage";
+
 import NotFound from "@/pages/NotFound";
 
 const queryClient = new QueryClient();

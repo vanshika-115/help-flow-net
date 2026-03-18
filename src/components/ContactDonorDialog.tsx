@@ -1,11 +1,10 @@
 import { useState } from "react";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
-import { Phone, MessageSquare, MapPin, Navigation } from "lucide-react";
+import { Phone, MessageSquare } from "lucide-react";
 import { useIsMobile } from "@/hooks/use-mobile";
 import { toast } from "sonner";
 import type { Donor } from "@/context/AppContext";
-import LiveTrackingMap from "./LiveTrackingMap";
 
 interface ContactDonorDialogProps {
   donor: Donor | null;

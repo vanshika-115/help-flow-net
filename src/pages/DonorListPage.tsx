@@ -27,6 +27,9 @@ export default function DonorListPage() {
 
   return (
     <div className="max-w-3xl mx-auto px-4 py-8 space-y-8">
+      {user && (
+        <p className="text-sm text-muted-foreground">Welcome, <span className="font-semibold text-foreground">{user.name}</span></p>
+      )}
       <h1 className="text-xl font-bold">Donor Directory</h1>
 
       {/* Available Donors */}

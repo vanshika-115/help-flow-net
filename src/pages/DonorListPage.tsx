@@ -6,7 +6,7 @@ import ContactDonorDialog from "@/components/ContactDonorDialog";
 import type { Donor } from "@/context/AppContext";
 
 export default function DonorListPage() {
-  const { donors } = useApp();
+  const { donors, user } = useApp();
   const available = donors.filter((d) => d.available);
   const unavailable = donors.filter((d) => !d.available);
   const [selectedDonor, setSelectedDonor] = useState<Donor | null>(null);

@@ -39,16 +39,7 @@ type AppContextType = {
 
 const AppContext = createContext<AppContextType | undefined>(undefined);
 
-const sampleDonors: Donor[] = [
-  { id: "1", name: "Rahul Sharma", bloodGroup: "O+", phone: "+91 98765 43210", city: "Mumbai", available: true, totalDonations: 3, lastDonationDate: "2025-11-10" },
-  { id: "2", name: "Priya Patel", bloodGroup: "A+", phone: "+91 87654 32109", city: "Delhi", available: true, totalDonations: 1, lastDonationDate: "2025-12-20" },
-  { id: "3", name: "Amit Kumar", bloodGroup: "B+", phone: "+91 76543 21098", city: "Bangalore", available: true, totalDonations: 5, lastDonationDate: "2025-09-15" },
-  { id: "4", name: "Sneha Reddy", bloodGroup: "AB+", phone: "+91 65432 10987", city: "Hyderabad", available: true, totalDonations: 2, lastDonationDate: "2026-01-05" },
-  { id: "5", name: "Vikram Singh", bloodGroup: "O+", phone: "+91 54321 09876", city: "Chennai", available: true, totalDonations: 4, lastDonationDate: "2025-10-01" },
-  { id: "6", name: "Neha Gupta", bloodGroup: "A+", phone: "+91 43210 98765", city: "Pune", available: true, totalDonations: 0 },
-  { id: "7", name: "Ravi Verma", bloodGroup: "B+", phone: "+91 32109 87654", city: "Kolkata", available: true, totalDonations: 2, lastDonationDate: "2025-08-20" },
-  { id: "8", name: "Anjali Nair", bloodGroup: "O-", phone: "+91 21098 76543", city: "Kochi", available: true, totalDonations: 1, lastDonationDate: "2026-02-01" },
-];
+const sampleDonors: Donor[] = [];
 
 const COOLDOWN_DAYS = 56; // ~8 weeks
 

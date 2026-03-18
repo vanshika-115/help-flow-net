@@ -52,11 +52,24 @@ const sampleDonors: Donor[] = [
 
 const COOLDOWN_DAYS = 56; // ~8 weeks
 
+function loadFromStorage<T>(key: string, fallback: T): T {
+  try {
+    const raw = localStorage.getItem(key);
+    if (raw) return JSON.parse(raw);
+  } catch {}
+  return fallback;
+}
+
 export function AppProvider({ children }: { children: ReactNode }) {
-  const [user, setUser] = useState<User>(null);
-  const [donors, setDonors] = useState<Donor[]>(sampleDonors);
-  const [bloodRequests, setBloodRequests] = useState<BloodRequest[]>([]);
+  const [user, setUser] = useState<User>(() => loadFromStorage("bb_user", null));
+  const [donors, setDonors] = useState<Donor[]>(() => loadFromStorage("bb_donors", sampleDonors));
+  const [bloodRequests, setBloodRequests] = useState<BloodRequest[]>(() => loadFromStorage("bb_requests", []));
   const [expandedSearch, setExpandedSearch] = useState(false);
+
+  // Persist to localStorage on changes
+  React.useEffect(() => { localStorage.setItem("bb_donors", JSON.stringify(donors)); }, [donors]);
+  React.useEffect(() => { localStorage.setItem("bb_requests", JSON.stringify(bloodRequests)); }, [bloodRequests]);
+  React.useEffect(() => { localStorage.setItem("bb_user", JSON.stringify(user)); }, [user]);
 
   const addDonor = (d: Donor) => setDonors((prev) => [d, ...prev]);
 

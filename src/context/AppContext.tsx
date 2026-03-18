@@ -43,8 +43,16 @@ const sampleDonors: Donor[] = [];
 
 const COOLDOWN_DAYS = 56; // ~8 weeks
 
+const STORAGE_VERSION = "v2";
+
 function loadFromStorage<T>(key: string, fallback: T): T {
   try {
+    if (localStorage.getItem("bb_version") !== STORAGE_VERSION) {
+      localStorage.removeItem("bb_donors");
+      localStorage.removeItem("bb_requests");
+      localStorage.setItem("bb_version", STORAGE_VERSION);
+      return fallback;
+    }
     const raw = localStorage.getItem(key);
     if (raw) return JSON.parse(raw);
   } catch {}

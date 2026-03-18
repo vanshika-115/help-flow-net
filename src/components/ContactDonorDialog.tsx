@@ -14,7 +14,6 @@ interface ContactDonorDialogProps {
 
 export default function ContactDonorDialog({ donor, open, onOpenChange }: ContactDonorDialogProps) {
   const isMobile = useIsMobile();
-  const [showMap, setShowMap] = useState(false);
 
   if (!donor) return null;
 

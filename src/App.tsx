@@ -8,7 +8,7 @@ import LoginPage from "@/pages/LoginPage";
 import DonorRegistration from "@/pages/DonorRegistration";
 import BloodRequestPage from "@/pages/BloodRequestPage";
 import DonorListPage from "@/pages/DonorListPage";
-import MapViewPage from "@/pages/MapViewPage";
+
 import NotFound from "@/pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -32,7 +32,7 @@ function AppRoutes() {
         <Route path="/donors" element={<DonorListPage />} />
         <Route path="/register" element={<DonorRegistration />} />
         <Route path="/request" element={<BloodRequestPage />} />
-        <Route path="/map" element={<MapViewPage />} />
+        
         <Route path="*" element={<NotFound />} />
       </Routes>
     </>

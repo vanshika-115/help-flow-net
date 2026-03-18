@@ -1,12 +1,16 @@
+import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { useApp } from "@/context/AppContext";
-import { toast } from "sonner";
 import { Clock, History } from "lucide-react";
+import ContactDonorDialog from "@/components/ContactDonorDialog";
+import type { Donor } from "@/context/AppContext";
 
 export default function DonorListPage() {
   const { donors } = useApp();
   const available = donors.filter((d) => d.available);
   const unavailable = donors.filter((d) => !d.available);
+  const [selectedDonor, setSelectedDonor] = useState<Donor | null>(null);
+  const [contactOpen, setContactOpen] = useState(false);
 
   const formatCooldown = (cooldownUntil?: string) => {
     if (!cooldownUntil) return "Unavailable";
@@ -14,6 +18,11 @@ export default function DonorListPage() {
     if (diff <= 0) return "Cooldown ended";
     const days = Math.ceil(diff / (1000 * 60 * 60 * 24));
     return `Available in ${days} days`;
+  };
+
+  const handleContact = (donor: Donor) => {
+    setSelectedDonor(donor);
+    setContactOpen(true);
   };
 
   return (
@@ -37,10 +46,7 @@ export default function DonorListPage() {
                   </p>
                 )}
               </div>
-              <Button
-                size="sm"
-                onClick={() => toast.success(`Contacting ${donor.name} at ${donor.phone}`)}
-              >
+              <Button size="sm" onClick={() => handleContact(donor)}>
                 Contact
               </Button>
             </div>
@@ -75,6 +81,8 @@ export default function DonorListPage() {
           </div>
         </div>
       )}
+
+      <ContactDonorDialog donor={selectedDonor} open={contactOpen} onOpenChange={setContactOpen} />
     </div>
   );
 }

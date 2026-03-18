@@ -29,21 +29,6 @@ export default function ContactDonorDialog({ donor, open, onOpenChange }: Contac
     toast.success(`Opening message for ${donor.name}`);
   };
 
-  if (showMap) {
-    return (
-      <Dialog open={open} onOpenChange={(v) => { onOpenChange(v); if (!v) setShowMap(false); }}>
-        <DialogContent className="max-w-2xl max-h-[90vh] overflow-y-auto">
-          <DialogHeader>
-            <DialogTitle className="flex items-center gap-2">
-              <Navigation className="h-4 w-4 text-primary" /> Live Tracking — {donor.name}
-            </DialogTitle>
-            <DialogDescription>Showing donor and your location with route</DialogDescription>
-          </DialogHeader>
-          <LiveTrackingMap donorName={donor.name} donorCity={donor.city} />
-        </DialogContent>
-      </Dialog>
-    );
-  }
 
   // Mobile: directly open dialer
   if (isMobile) {
